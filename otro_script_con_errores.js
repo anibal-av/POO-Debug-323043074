@@ -1,25 +1,25 @@
 
 class Persona{
     #edad
-    constructor(){
+    constructor(nombre, edadInicial){
         this.nombre=nombre;
-        this.edad=edadInicial;
+        this.#edad=edadInicial;
     }
 
     get edad(){
-        return this.edad
+        return this.#edad
     }
 
     set edad(nEdad){
         if(nEdad>0){
-            this.#edad=nuevaEdad;
+            this.#edad=nEdad;
         } else {
             console.log(`Error. Ingrese una edad valida`);
         }
     }
 
     presentarse(){
-        console.log(`Hola soy {this.nombre} y tengo edad {this.#edad}`)
+        console.log(`Hola soy ${this.nombre} y tengo edad ${this.#edad}`)
     }
 }
 
@@ -27,7 +27,7 @@ class Estudiante extends Persona{
     #promedio
     constructor(nombre, edadInicial, promedioInicial){
         super(nombre, edadInicial);
-        this.promedio=promedioInicial;
+        this.#promedio=promedioInicial;
     }
 
     get promedio(){
@@ -43,19 +43,18 @@ class Estudiante extends Persona{
     }
     presentarse(){
         super.presentarse();
-        console.log(`Soy estudiante y mi promedio es {this.#promedio}`);
+        console.log(`Soy estudiante ${this.nombre} y mi promedio es ${this.#promedio}`);
     }    
 }
  
 class Escuela{
-    
     #estudiantes = []
     
     get estudiantes(){
-        return this.estudiantes;
+        return this.#estudiantes;
     }
 
-    set estudiantes(nuevaLista){
+    set estudiantes(estudiante){
         this.#estudiantes=[estudiante]
     }
 
@@ -64,8 +63,8 @@ class Escuela{
     }
 
     mostrarAprobados(){
-        for(let i = 0; i<this.#estudiantes.length; i++){
-            if(this.#estudiantes[i].promedio>6){
+        for(let i = 0; i < this.#estudiantes.length; i++){
+            if(this.#estudiantes[i].promedio > 6){
                 this.#estudiantes[i].presentarse();
             }
         }
@@ -81,3 +80,4 @@ miEscuela.agregarEstudiante(est1);
 miEscuela.agregarEstudiante(est2);
 
 miEscuela.mostrarAprobados();
+
